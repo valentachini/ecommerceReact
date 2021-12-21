@@ -1,11 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import NavbarCss from './components/NavbarCss';
 
-function App() {
+/*function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+
+      
+        
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -22,4 +26,18 @@ function App() {
   );
 }
 
-export default App;
+export default App;*/
+
+const App = () => {
+  return(
+    <div className='hooks-app'>
+      <div >
+      <NavbarCss/>
+      </div>
+      <h1> adassda </h1>
+      
+    </div>
+  )
+}
+
+export default App
