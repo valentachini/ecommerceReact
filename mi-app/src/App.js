@@ -1,6 +1,8 @@
-import logo from './logo.svg';
+import logo from '../src/logo.svg';
 import './App.css';
-import NavbarCss from './components/NavbarCss';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import NavbarCss from './components/navBar/NavbarCss';
+
 
 /*function App() {
   return (
@@ -29,13 +31,14 @@ import NavbarCss from './components/NavbarCss';
 export default App;*/
 
 const App = () => {
+  
+  const greeting = 'Hola mundo'
+
   return(
-    <div className='hooks-app'>
-      <div >
+    <div className='hooks-app'>      
       <NavbarCss/>
-      </div>
-      <h1> adassda </h1>
-      
+      <ItemListContainer greeting={greeting} />   
+  
     </div>
   )
 }
