@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
-import ItemCount from '../ItemCount/ItemCount'
+import React, { useEffect, useState } from 'react';
+import { traerProductos } from '../Products/products';
+import ItemList from '../ItemList/ItemList';
 
-const ItemListContainer = ({greeting}) => {
+/*const ItemListContainer = ({greeting}) => {
 
     const [stock, setStock] = useState(20)
 
@@ -13,4 +14,38 @@ const ItemListContainer = ({greeting}) => {
     )
 }
 
-export default ItemListContainer
+export default ItemListContainer*/
+
+const ItemListContainer = ({ saludo }) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true); 
+
+    useEffect(() => {
+        traerProductos
+            .then((respuesta) => {
+                setData(respuesta);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    return (
+        <div>
+            {loading ? (
+                <h3>Loading...</h3>
+            ) : (
+                <div>
+                    <h2 style={{ textAlign: 'center' }}>{saludo}</h2>
+                    <ItemList productos={data} />
+ 
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ItemListContainer;
