@@ -1,6 +1,7 @@
 import React from 'react'
 import CartWidget from './CartWidget'
 import './NavBar.css'
+import {Link} from 'react-router-dom'
 
 const NavbarCss = () => {
     return (
@@ -9,17 +10,17 @@ const NavbarCss = () => {
             <nav>
                 <ul>
                     <li>
-                        <a href="/#">Home</a>
+                        <Link to={`/`}>Home</Link>
                     </li>
                     <li>
-                        <a href="/#">Shop</a>
+                    <Link to={`/`}>Shop</Link>
                     </li>
                     <li>
-                        <a href="/#">LogIn</a>
+                    <Link to={`/`}>LogIn</Link>
                     </li>
                 </ul>                
             </nav>
-                    <a href="/#"><CartWidget/></a>
+                    <Link to={`/`}><CartWidget/></Link>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { traerProductos } from '../Products/products';
 import ItemList from '../ItemList/ItemList';
+import { useParams } from 'react-router-dom'
 
 /*const ItemListContainer = ({greeting}) => {
 
@@ -19,19 +20,28 @@ export default ItemListContainer*/
 const ItemListContainer = ({ saludo }) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true); 
+    const { categoriaId } = useParams()
 
     useEffect(() => {
-        traerProductos
-            .then((respuesta) => {
-                setData(respuesta);
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+        if (categoriaId) {
+           traerProductos
+            .then(res => setData(res.filter(prod => prod.id === categoriaId)))
+            .finally(() => setLoading(false))
+
+        } else {
+            traerProductos
+                .then((respuesta) => {
+                    setData(respuesta);
+                })
+
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    }, [categoriaId]);
 
     return (
         <div>

@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import './Item.css';
-import { Link } from 'react-router-dom'
+//import './Item.css';
+import ItemCount from '../ItemCount/ItemCount'
 
-const Item = ({ id, name, price, stock, img }) => {
+
+const ItemDetail = ({ name, price, stock, img }) => {
     
     const [cantidad, setCantidad] = useState(20)
     
@@ -12,9 +13,9 @@ const Item = ({ id, name, price, stock, img }) => {
             <h3>Precio: {price}</h3>
             <h3>Stock: {stock}</h3>
             <img src={img} alt={name} />
-            <Link to={`/detail/${id}`}><button variant="primary">Detalle</button></Link>
+            <ItemCount cantidad = {cantidad} initial = {1} onAdd={()=>console.log('agregado al carrito')} />
         </div>
     );
 };
 
-export default Item;
+export default ItemDetail;
