@@ -1,21 +1,36 @@
-import React, {useState} from 'react'
-//import './Item.css';
+import React from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
 
 
-const ItemDetail = ({ name, price, stock, img }) => {
-    
-    const [cantidad, setCantidad] = useState(20)
-    
+const ItemDetail = ({ product }) => {
+
+    const [show, setShow] = useState(true)
+
+    const { name, price, stock, img} = product
+
+    const onAdd = (contador) => {
+        setShow(false)
+        alert(`${contador}`)
+    }
+
     return (
-        <div className="card">
+        <div>
             <h2>{name}</h2>
             <h3>Precio: {price}</h3>
             <h3>Stock: {stock}</h3>
+            
             <img src={img} alt={name} />
-            <ItemCount cantidad = {cantidad} initial = {1} onAdd={()=>console.log('agregado al carrito')} />
-        </div>
-    );
-};
+            {show ? <ItemCount stock={stock} onAdd={onAdd} initial={1}/> :
+                <div>
+                    <Link to='/cart'><button>Terminar la Compra</button></Link>
+                    <Link to='/'><button>Seguir Comprando</button></Link>
+                </div>}
 
-export default ItemDetail;
+        </div>
+
+    )
+}
+
+export default ItemDetail

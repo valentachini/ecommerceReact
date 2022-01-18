@@ -1,6 +1,6 @@
 import './App.css';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-import ItemDetailContainer from './components/ItemDetailContainer/ItemDetail';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import NavbarCss from './components/navBar/NavbarCss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -40,10 +40,10 @@ const App = () => {
       <BrowserRouter> 
       <NavbarCss/>
       <Routes>
-        <Route path='/' element={<ItemListContainer greeting={greeting} />}/>
+        <Route path='/' element={<ItemListContainer/>}/>
         <Route path='/category/:categoriaId' element={<ItemListContainer/>}/>
-        <Route path='/detail/:detailId' element={<ItemDetailContainer />} />
-         
+        <Route path='/detail/:detailId' element={<ItemDetailContainer/>}/>
+        
       </Routes> 
       </BrowserRouter>
   

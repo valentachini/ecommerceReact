@@ -25,7 +25,7 @@ const ItemListContainer = ({ saludo }) => {
     useEffect(() => {
         if (categoriaId) {
            traerProductos
-            .then(res => setData(res.filter(prod => prod.id === categoriaId)))
+            .then(res => setData(res.filter(prod => prod.categoria === categoriaId)))
             .finally(() => setLoading(false))
 
         } else {

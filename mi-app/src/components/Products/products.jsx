@@ -5,6 +5,7 @@ export const products = [
         price: 300,
         stock: 5,
         img: 'https://i.pinimg.com/564x/b5/74/72/b57472e19afc76d234d65938827b4793.jpg',
+        categoria: 'varios'
     },
     {
         id: '2',
@@ -12,6 +13,7 @@ export const products = [
         price: 300,
         stock: 5,
         img: 'https://i.pinimg.com/originals/cf/2a/bf/cf2abf397fcf24b5ebeb3be19c844c71.jpg',
+        categoria: 'platitos'
     },
     {
         id: '3',
@@ -19,6 +21,7 @@ export const products = [
         price: 300,
         stock: 5,
         img: 'https://i.pinimg.com/originals/5e/ba/9c/5eba9cbb4e96eb8f679b3187ab6f52aa.jpg',
+        categoria: 'velas'
     },
     {
         id: '4',
@@ -26,6 +29,7 @@ export const products = [
         price: 300,
         stock: 5,
         img: 'https://i.pinimg.com/564x/ad/fc/ea/adfcea149a6df277cd018ac757cbb7ef.jpg',
+        categoria: 'platitos'
     },
 ];
 

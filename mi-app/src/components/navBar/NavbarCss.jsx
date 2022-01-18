@@ -10,17 +10,19 @@ const NavbarCss = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to={`/`}>Home</Link>
+                    <Link to={`/`}>Home</Link>
                     </li>
                     <li>
-                    <Link to={`/`}>Shop</Link>
+                    <Link to={`/category/platitos`}>Platitos</Link>
                     </li>
                     <li>
-                    <Link to={`/`}>LogIn</Link>
+                    <Link to={`/category/velas`}>Velas</Link>
                     </li>
+                    <li> 
+                    <Link to={`/cart`}><CartWidget/></Link>
+                    </li> 
                 </ul>                
             </nav>
-                    <Link to={`/`}><CartWidget/></Link>
         </div>
     )
 }
