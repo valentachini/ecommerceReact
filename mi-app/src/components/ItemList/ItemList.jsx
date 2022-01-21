@@ -3,7 +3,7 @@ import Item from '../Item/Item';
 
 const ItemList = ({ productos }) => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="container">
             {productos.map(prod=> <Item key={prod.id} prod={prod}/>)}
         </div>
     );

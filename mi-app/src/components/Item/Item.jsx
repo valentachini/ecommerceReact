@@ -7,14 +7,21 @@ const Item = ({prod}) => {
     const {id, name, price, stock, img, categoria} = prod
     
     return (
-        <div className="card">
+        <div className="itemCard">
+            <div className="itemImg">
+                <img src={img} alt={name}/>
+            </div>
 
-            <h2>{name}</h2>
-            <h3>Precio: {price}</h3>
-            <h3>Stock: {stock}</h3>
-            
-            <img src={img} alt={name} />
-            <Link to={`/detail/${id}`}><button variant="primary">Detalle</button></Link>
+            <div className="itemInfo">
+                <h2>{name}</h2>
+                <h3>Precio: {price}</h3>
+                <h3>Stock: {stock}</h3>
+                
+                <div className="itemBtn">
+                    <Link to={`/detail/${id}`}><button variant="primary">Detalle</button></Link>
+                </div>            
+            </div>
+
         </div>
     );
 };
