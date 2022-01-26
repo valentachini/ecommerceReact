@@ -51,3 +51,63 @@ body{
 .itemBtn button:hover{
   background-color: #665D5C;
 }
+
+
+.cartContainer{
+  width: 70%;
+ height: 85%;
+ background-color: #ffffff;
+ border-radius: 20px;
+}
+
+.cartHeader{
+  margin: auto;
+ width: 90%;
+ height: 15%;
+}
+
+.cartHeader, h1{
+  font-size: 20px;
+}
+
+.cartHeader, button{
+  height: 50px;
+  width: 100px; 
+  border: transparent;
+  border-radius: 60px;
+  color: #ffffff;
+  background-color: #A69795;
+  cursor: pointer; 
+}
+
+.cartItems{
+  margin: auto;
+  width: 90%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartImg, img{
+  width: 40%;
+  text-align: center;
+}
+
+.cartDetail{
+  height: 100%;
+  padding-top: 5px;
+  font-size: 15px;
+  color: #000;
+}
+
+.prices{
+  height: 100%;
+  text-align: right;
+ }
+ 
+ .amount{
+  padding-top: 20px;
+  font-size: 20px;
+  color: #000;
+ }

@@ -1,7 +1,6 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { useCartContext } from '../context/cartContext'
+import { CartContext } from '../context/cartContext'
 import ItemCount from '../ItemCount/ItemCount'
 
 
@@ -11,10 +10,10 @@ const ItemDetail = ({ product }) => {
 
     const { name, price, stock, img} = product
 
-    const {agregarAlCarrito} = useCartContext()
+    const {addToCart} = useContext(CartContext);
 
     const onAdd = (contador) => {
-        console.log(contador)
+        addToCart (product, contador)
         setShow(false)
     }
 

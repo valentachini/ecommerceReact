@@ -2,7 +2,8 @@ import React from 'react'
 import './NavBar.css'
 import { BiShoppingBag } from 'react-icons/bi';
 
-const CartWidget = () => {
+const CartWidget = () => {  
+
     return (
         <div>
             <BiShoppingBag className='cartIcon'/>
