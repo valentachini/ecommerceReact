@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { traerProductos } from '../Products/products';
+import { products, traerProductos } from '../Products/products';
 import ItemList from '../ItemList/ItemList';
 import { useParams } from 'react-router-dom'
+
+import { collection, getDocs, getFirestore, query } from 'firebase/firestore'
 
 /*const ItemListContainer = ({greeting}) => {
 
@@ -23,24 +25,32 @@ const ItemListContainer = ({ saludo }) => {
     const { categoriaId } = useParams()
 
     useEffect(() => {
-        if (categoriaId) {
-           traerProductos
-            .then(res => setData(res.filter(prod => prod.categoria === categoriaId)))
-            .finally(() => setLoading(false))
+        const db = getFirestore()
+        const queryCollection = query (collection(db, 'items'))
+        getDocs(queryCollection)
+        .then (res => setData(res.docs.map(prod=>({id: prod.id, ...prod.data()}))))
 
-        } else {
-            traerProductos
-                .then((respuesta) => {
-                    setData(respuesta);
-                })
+        
 
-                .catch((error) => {
-                    console.error(error);
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
-        }
+
+        // if (categoriaId) {
+        //    traerProductos
+        //     .then(res => setData(res.filter(prod => prod.categoria === categoriaId)))
+        //     .finally(() => setLoading(false))
+
+        // } else {
+        //     traerProductos
+        //         .then((respuesta) => {
+        //             setData(respuesta);
+        //         })
+
+        //         .catch((error) => {
+        //             console.error(error);
+        //         })
+        //         .finally(() => {
+        //             setLoading(false);
+        //         });
+        // }
     }, [categoriaId]);
 
     return (
