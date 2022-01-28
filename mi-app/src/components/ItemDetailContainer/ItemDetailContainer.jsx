@@ -19,7 +19,8 @@ const ItemDetailContainer = () => {
         const queryProd = doc(db, 'items', 'ag6Oz8WwXgEZuuIJ3jZh')
         getDoc(queryProd)
         .then(resp => setProduct({id: resp.id, ...resp.data()}))
-
+        .catch(err => err)
+        .finally(()=>setLoading(false))
 
 
         // traerProductos

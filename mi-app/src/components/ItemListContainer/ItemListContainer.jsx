@@ -29,6 +29,8 @@ const ItemListContainer = ({ saludo }) => {
         const queryCollection = query (collection(db, 'items'))
         getDocs(queryCollection)
         .then (res => setData(res.docs.map(prod=>({id: prod.id, ...prod.data()}))))
+        .catch(err => err)
+        .finally(()=>setLoading(false))
 
         
 
