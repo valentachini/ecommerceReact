@@ -34,9 +34,7 @@ import { CartContextProvider } from './components/context/cartContext';
 export default App;*/
 
 const App = () => {
-  
-  const greeting = 'Hola mundo'
-
+    
   return(
     <div className='hooks-app'>
       <CartContextProvider>

@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Item.css';
 import { Link } from 'react-router-dom'
 
 const Item = ({prod}) => {
 
-    const {id, name, price, stock, img, categoria} = prod
+    const {id, name, price, stock, img} = prod
     
     return (
         <div className="itemCard">
