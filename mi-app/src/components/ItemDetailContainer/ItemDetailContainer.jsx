@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { doc, getDoc, getFirestore} from 'firebase/firestore'
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
-import { doc, getDoc, getFirestore} from 'firebase/firestore'
-
-
-//import './Item.css';
 
 
 const ItemDetailContainer = () => {
@@ -23,10 +20,6 @@ const ItemDetailContainer = () => {
         .catch(err => err)
         .finally(()=>setLoading(false))
 
-
-
-        // traerProductos
-        //     .then(res => setProduct(res.find(prod => prod.id === detailId)))
     }, [detailId])
     
 

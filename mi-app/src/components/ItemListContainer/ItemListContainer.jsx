@@ -1,23 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import ItemList from '../ItemList/ItemList';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { collection, getDocs, getFirestore, query } from 'firebase/firestore'
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
+import ItemList from '../ItemList/ItemList';
 
-
-
-/*const ItemListContainer = ({greeting}) => {
-
-    const [stock, setStock] = useState(20)
-
-    return (
-        <div>
-            <h1>{greeting} </h1>
-            <ItemCount stock = {stock} initial = {1} onAdd={()=>console.log('agregado al carrito')} /> 
-        </div>
-    )
-}
-
-export default ItemListContainer*/
 
 const ItemListContainer = ({ saludo }) => {
     const [data, setData] = useState([]);
@@ -26,33 +11,19 @@ const ItemListContainer = ({ saludo }) => {
 
     useEffect(() => {
         const db = getFirestore()
-        const queryCollection = query (collection(db, 'items'))
-        getDocs(queryCollection)
-        .then (res => setData(res.docs.map(prod=>({id: prod.id, ...prod.data()}))))
-        .catch(err => err)
-        .finally(()=>setLoading(false))
-
-        
-
-
-        // if (categoriaId) {
-        //    traerProductos
-        //     .then(res => setData(res.filter(prod => prod.categoria === categoriaId)))
-        //     .finally(() => setLoading(false))
-
-        // } else {
-        //     traerProductos
-        //         .then((respuesta) => {
-        //             setData(respuesta);
-        //         })
-
-        //         .catch((error) => {
-        //             console.error(error);
-        //         })
-        //         .finally(() => {
-        //             setLoading(false);
-        //         });
-        // }
+        if (categoriaId) {
+            const queryCollection = query (collection(db, 'items'), where ('categoria', '==', categoriaId))
+            getDocs(queryCollection)
+            .then (res => setData(res.docs.map(prod=>({id: prod.id, ...prod.data()}))))
+            .catch(err => err)
+            .finally(()=>setLoading(false))            
+        } else {
+            const queryCollection = collection (db, 'items')
+            getDocs(queryCollection)
+            .then(res => setData( res.docs.map(prod => ( { id: prod.id, ...prod.data() } ) ) ))
+            .catch(err => err)
+            .finally(()=> setLoading(false))
+        }    
     }, [categoriaId]);
 
     return (
@@ -61,7 +32,7 @@ const ItemListContainer = ({ saludo }) => {
                 <h3>Loading...</h3>
             ) : (
                 <div>
-                    <h2 style={{ textAlign: 'center' }}>{saludo}</h2>
+                    <h2>{saludo}</h2>
                     <ItemList productos={data} />
  
                 </div>

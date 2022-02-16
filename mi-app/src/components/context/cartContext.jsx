@@ -1,59 +1,152 @@
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, createContext } from 'react'
+
 
 const cartContext = createContext([])
 
-export const CartContext = createContext();
 
 export function useCartContext() {
     return useContext(cartContext)
 }
 
-export const CartContextProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+export const CartContextProvider = ({children}) => {
 
-    const addToCart = (item, cantidad) => {
-        if (isOnCart(item.id)) {
-            sumarCantidad(item, cantidad);
-        } else {
-            setCart([...cart, { ...item, cantidad }]);
-        }
-    };
+    const [cartList, setCartList] = useState([])
 
-    const isOnCart = (id) => {
-        const carrito = cart.some((prod) => prod.id === id);
 
-        return carrito;
-    };
+    function addToCart(items) {
 
-    const sumarCantidad = (item, cantidad) => {
-        const copia = [...cart];
-        copia.forEach((producto) => {
-            producto.id === item.id && (producto.cantidad += cantidad);
-        });
-    };
+         const indice=cartList.findIndex(i => i.id === items.id) 
+       
+         if (indice > -1){
+             const qtyVieja=cartList[indice].stock
+ 
+             let qtyNueva= qtyVieja + items.stock
+ 
+             cartList[indice].stock = qtyNueva
+             
+             let arrAux = [...cartList]
+             
+             setCartList(arrAux)
+ 
+         }else{
+            setCartList([...cartList, items])
+         }
+    }
 
+    const totalPrice =()=>{
+        return cartList.reduce((acum, prod) => acum + (prod.stock * prod.price) , 0)
+      }
+  
     const deleteProd = (id) => {
-        setCart(cart.filter((producto) => producto.id !== id));
-    };
+        setCartList( cartList.filter(prod => prod.id !== id) )
+    }
 
-    const vaciarCarrito = () => {
-        setCart([]);
-    };
+    const stockItem = () =>{
+        return cartList.reduce( (acum, item)=> acum = acum + item.stock , 0)
+    }
 
-    const total = () => {
-        let count = 0;
-        cart.forEach((producto) => {
-            count += producto.price * producto.cantidad;
-        });
-        return count;
-    };
+    
+    function vaciarCarrito() {
+        setCartList([])
+    }
 
-    return (
-        <CartContext.Provider
-            value={{ cart, addToCart, deleteProd, vaciarCarrito, total }}
-        >
+    console.log(cartList)
+
+    return(
+        <cartContext.Provider value={{
+            cartList,
+            addToCart,
+            vaciarCarrito,
+            totalPrice,
+            deleteProd,
+            stockItem
+        }} >
             {children}
-        </CartContext.Provider>
-    );
-};
+        </cartContext.Provider>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useState, useContext, createContext } from "react";
+
+// const CartContext = createContext([])
+
+// // export const CartContext = createContext();
+
+// export function useCartContext() {
+//     return useContext(CartContext)
+// }
+
+// export const CartContextProvider = ({ children }) => {
+//     const [cart, setCart] = useState([]);
+
+//     const addToCart = (item, cantidad) => {
+//         if (isOnCart(item.id)) {
+//             sumarCantidad(item, cantidad);
+//         } else {
+//             setCart([...cart, { ...item, cantidad }]);
+//         }
+//     };
+
+//     const isOnCart = (id) => {
+//         const carrito = cart.some((prod) => prod.id === id);
+
+//         return carrito;
+//     };
+
+//     const sumarCantidad = (item, cantidad) => {
+//         const copia = [...cart];
+//         copia.forEach((producto) => {
+//             producto.id === item.id && (producto.cantidad += cantidad);
+//         });
+//     };
+
+//     const deleteProd = (id) => {
+//         setCart(cart.filter((producto) => producto.id !== id));
+//     };
+
+//     const vaciarCarrito = () => {
+//         setCart([]);
+//     };
+
+//     const total = () => {
+//         let count = 0;
+//         cart.forEach((producto) => {
+//             count += producto.price * producto.cantidad;
+//         });
+//         return count;
+//     };
+
+//     return (
+//         <CartContext.Provider
+//             value={{ cart, addToCart, deleteProd, vaciarCarrito, total }}
+//         >
+//             {children}
+//         </CartContext.Provider>
+//     );
+// };
 

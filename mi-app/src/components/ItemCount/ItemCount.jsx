@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './itemCount.css'
 
 const ItemCount = ({ stock, onAdd }) => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
 
     return (
         <>
@@ -14,12 +14,12 @@ const ItemCount = ({ stock, onAdd }) => {
                     <p>
                         {count}
                     </p>
-                    <button disabled={count === 0} onClick={() => setCount(count - 1)}>
+                    <button disabled={count === 1} onClick={() => setCount(count - 1)}>
                         -
                     </button>
                 </div>
                 <div>
-                    <button disabled={count === 0} onClick={() => onAdd(count)}>
+                    <button disabled={count === 1} onClick={() => onAdd(count)}>
                         Agregar al carrito
                     </button>
                 </div>
@@ -28,27 +28,5 @@ const ItemCount = ({ stock, onAdd }) => {
     );
 };
 
-
-
-
-
-
-
-
-// const ItemCount = ({stock, initial, onAdd}) => {
-
-//     const [amount, setAmount] = useState(initial)
-
-//     return (
-//         <div className="itemBtn">
-//             <div className='itemcount'>
-//                 <button onClick={()=>setAmount(Math.max( amount - 1, initial))}>-</button>
-//                 <span>{amount}</span>
-//                 <button onClick={()=>setAmount(Math.min( amount + 1,  stock))}>+</button>  
-//                 <button onClick={()=>onAdd()}> Agregar al carrito</button>          
-//             </div>
-//         </div>
-//     )
-// }
 
 export default ItemCount

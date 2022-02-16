@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCartContext } from '../context/cartContext';
-// import { Link } from 'react-router-dom';
 import { addDoc, collection, documentId, getDocs, getFirestore, query, updateDoc, where, writeBatch } from "firebase/firestore"
 import Resume from '../resume/resume';
 
 
 
 const Cart = () => {
-    const { cartList, vaciarCarrito, precioTotal, deleteProd } = useCartContext ()
+    const { cartList, vaciarCarrito, totalPrice, deleteProd } = useCartContext ()
     const [condicional, setCondicional] = useState(false);
     const [dataForm , setDataForm ] = useState({
         email: '',
@@ -19,33 +18,30 @@ const Cart = () => {
     const realizarCompra = async (e) => {
         e.preventDefault()   
          
-        let orden = {}
-             
+        let orden = {}             
 
         orden.buyer = dataForm 
-        orden.total = precioTotal();
+        orden.total = totalPrice();
 
         orden.items = cartList.map(cartItem => {
             const id = cartItem.id;
-            const nombre = cartItem.title;
-            const precio = cartItem.precio * cartItem.cantidad;
-            const cantidad = cartItem.cantidad
+            const nombre = cartItem.name;
+            const precio = cartItem.price * cartItem.stock;
+            const cantidad = cartItem.stock
             
             return {id, nombre, precio, cantidad}   
         }) 
-
+console.log(orden)
         
         const db = getFirestore()
 
-        const oredenCollection = collection(db, 'ordenes')
-        await addDoc(oredenCollection, orden) 
+        const orderCollection = collection(db, 'ordenes')
+        await addDoc(orderCollection, orden) 
         .then(resp => setIdOrden(resp.id))
         .catch(err => console.log(err))
-        
-
+        .finally(() => console.log('cargando') )
         
         const queryCollection = collection(db, 'items')
-
       
         const queryActulizarStock = query(
             queryCollection, 
@@ -66,15 +62,13 @@ const Cart = () => {
         setCondicional(true)    
     }
 
-    function handleChange(e) {
-        
+    function handleChange(e) {        
         setDataForm({
             ...dataForm,
             [e.target.name]: e.target.value
         })
-    }
-    
-    
+    }  
+
     return (
         <div>  
             {
@@ -101,17 +95,17 @@ const Cart = () => {
                                                                 <h3>{prod.name}</h3>
                                                                 <div className='prices'>
                                                                     <h3>${prod.price}</h3>                                        
-                                                                    <h3 className='amount'>Cantidad: {prod.cantidad}</h3>
+                                                                    <h3 className='amount'>Cantidad: {prod.stock}</h3>
                                                                 </div>
                             
                                                                 <button onClick={() => deleteProd(prod.id)}>
                                                                     X
                                                                 </button>
+                                                        <h3>{totalPrice}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 ))}
-                                                    {/* <h3>{total}</h3> */}
                                                 </div>
                       
                         
@@ -124,7 +118,7 @@ const Cart = () => {
                             <input 
                                 type='text' 
                                 name='name' 
-                                placeholder='name' 
+                                placeholder='nombre' 
                                 onChange={handleChange}
                                 value={dataForm.name}
                             /><br />
@@ -142,9 +136,16 @@ const Cart = () => {
                                 onChange={handleChange}
                                 value={dataForm.email}
                             /><br/>
-                            <button>Generar Orden</button>
+                            <input 
+                                type='email' 
+                                name='email'
+                                placeholder='confirmar email' 
+                                onChange={handleChange}
+                                value={dataForm.email}
+                            /><br/>
+                        <button onClick={realizarCompra}>Generar Orden</button>
+                            {/* <button>Generar Orden</button> */}
                         </form>
-                        {/* <button onClick={realizarCompra}>Generar Orden</button> */}
                     </>
 
             }          

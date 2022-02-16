@@ -2,8 +2,12 @@ import React from 'react'
 import CartWidget from './CartWidget'
 import './NavBar.css'
 import {Link} from 'react-router-dom'
+import { useCartContext } from '../context/cartContext'
 
 const NavbarCss = () => {
+
+    const {stockItem} = useCartContext()
+
     return (
         <div className='navbar'>
             <p className='navTitle'>Tienda artesanal</p>
@@ -19,7 +23,9 @@ const NavbarCss = () => {
                     <Link to={`/category/velas`}>Velas</Link>
                     </li>
                     <li> 
-                    <Link to={`/cart`}><CartWidget/></Link>
+                    <Link to={`/cart`}><CartWidget/>
+                    {stockItem() !== 0 && stockItem() }
+                    </Link>
                     </li> 
                 </ul>                
             </nav>
