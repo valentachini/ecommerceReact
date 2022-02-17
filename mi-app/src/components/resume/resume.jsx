@@ -1,8 +1,12 @@
 import React from 'react';
 
 function Resume({idOrden}) {
-  return <div>
-     El id de la orden generada es: {idOrden}
+  return <div className='loaderHearts'>
+    <div className='success'>
+      <p>Tu compra fue realizada! 
+       El id es: {idOrden}
+      </p>
+    </div>
   </div>;
 }
 

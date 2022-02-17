@@ -2,16 +2,20 @@
     font-weight: bold;
     background-color: #E6D2CF;
     width: 100%;
-    display: flex;  
+    display: flex;
     align-items: center;
     justify-content: space-between;
   }
   
 nav{
-    display: flex;  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
   }
   
 .navTitle{
+    display: flex;
+    align-items: center;
     margin-top: 20px;
     margin-left: 50px;
     color: #fff;
@@ -19,13 +23,28 @@ nav{
   
 ul{
     display: flex; 
+    align-items: center;
   }
   
 li{
     list-style: none;
     padding: 10px;
   }
-  
+
+.iconoNav{
+  display: flex;
+  align-items: center;
+  fill: #fff;
+  width: 30px;
+  stroke: white;
+  stroke-width: 6;
+}  
+
+.cartLink{
+  display: flex;
+  align-items: center;
+}
+
 .cartIcon{
     padding: 10px;
     font-size: 30px;

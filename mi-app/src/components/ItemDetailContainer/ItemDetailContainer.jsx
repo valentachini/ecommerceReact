@@ -1,6 +1,7 @@
 import { doc, getDoc, getFirestore} from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import LoaderSvg from '../../media/loader';
 import ItemDetail from './ItemDetail';
 
 
@@ -24,11 +25,10 @@ const ItemDetailContainer = () => {
     
 
     return (
-        <div className="container">
+        
             <div>
-                {loading ? <h3>Loading...</h3> : <ItemDetail product={product}/>}
-            </div>         
-        </div>
+                {loading ? <div className='loaderHearts'><LoaderSvg/></div> : <div className='container'><ItemDetail product={product}/></div>}
+            </div>       
     );
 };
 

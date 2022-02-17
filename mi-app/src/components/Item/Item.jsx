@@ -13,15 +13,15 @@ const Item = ({prod}) => {
             </div>
 
             <div className="itemInfo">
-                <h2>{name}</h2>
-                <h3>Precio: {price}</h3>
-                <h3>Stock: {stock}</h3>
-                
-                <div className="itemBtn">
+                <div className='itemInfoList'>
+                    <h2>{name}</h2>
+                    <p>Precio: ${price}</p>
+                    <p>Stock: {stock}</p>
+                </div>                
+                <div className="itemBtnList">
                     <Link to={`/detail/${id}`}><button variant="primary">Detalle</button></Link>
                 </div>            
             </div>
-
         </div>
     );
 };

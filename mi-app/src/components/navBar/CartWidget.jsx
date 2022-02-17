@@ -1,13 +1,11 @@
 import React from 'react'
 import './NavBar.css'
-import { BiShoppingBag } from 'react-icons/bi';
+import { BsBag } from 'react-icons/bs';
 
 const CartWidget = () => {  
 
     return (
-        <div>
-            <BiShoppingBag className='cartIcon'/>
-        </div>
+            <BsBag className='cartIcon'/>
     )
 }
 

@@ -7,19 +7,19 @@ const ItemCount = ({ stock, onAdd }) => {
     return (
         <>
             <div>
-                <div>
-                    <button disabled={count === stock} onClick={() => setCount(count + 1)}>
-                        +
+                <div className='itemBtnDetail'>
+                    <button disabled={count === 1} onClick={() => setCount(count - 1)}>
+                        -
                     </button>
                     <p>
                         {count}
                     </p>
-                    <button disabled={count === 1} onClick={() => setCount(count - 1)}>
-                        -
+                    <button disabled={count === stock} onClick={() => setCount(count + 1)}>
+                        +
                     </button>
                 </div>
-                <div>
-                    <button disabled={count === 1} onClick={() => onAdd(count)}>
+                <div className='itemBtnDetailAdd'>
+                    <button disabled={count === 0} onClick={() => onAdd(count)}>
                         Agregar al carrito
                     </button>
                 </div>

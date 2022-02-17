@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import ItemList from '../ItemList/ItemList';
+import LoaderSvg from '../../media/loader';
 
 
 const ItemListContainer = ({ saludo }) => {
@@ -29,7 +30,7 @@ const ItemListContainer = ({ saludo }) => {
     return (
         <div>
             {loading ? (
-                <h3>Loading...</h3>
+                <div className='loaderHearts'><LoaderSvg/></div>
             ) : (
                 <div>
                     <h2>{saludo}</h2>

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useCartContext } from '../context/cartContext';
 import { addDoc, collection, documentId, getDocs, getFirestore, query, updateDoc, where, writeBatch } from "firebase/firestore"
 import Resume from '../resume/resume';
-
+import { AiFillDelete } from 'react-icons/ai';
+import { BsBagX } from 'react-icons/bs';
 
 
 const Cart = () => {
@@ -70,7 +71,7 @@ console.log(orden)
     }  
 
     return (
-        <div>  
+        <div className='container'>  
             {
                 condicional  ? 
                     <Resume idOrden={idOrden} />
@@ -78,44 +79,41 @@ console.log(orden)
                     <>
                         {
                             <div className='cartContainer' >                
-                                                     <div className='cartHeader'> 
-                                                         <div >
-                                                             <h1>Carrito</h1>
-                                                             <button onClick={vaciarCarrito}>Vaciar Carrito</button>
-                                                        </div>
+                                                     <div className='cartHeader'>                                                          
+                                                             <h2>Carrito</h2>
+                                                             <button className='btn btnEmpty' onClick={vaciarCarrito}> <BsBagX/>Vaciar Carrito</button>
                                                     </div>
                             
                                                 {cartList?.map((prod) => (
-                                                    <div key={prod.id}>
-                                                        <div className='cartItems'>
+                                                    <div className='cartItems' key={prod.id}>
+                                                        
                                                             <div className='cartImg'>
                                                                 <img src={prod.img} alt={prod.name}/>
                                                             </div>
                                                             <div className='cartDetail'>
                                                                 <h3>{prod.name}</h3>
                                                                 <div className='prices'>
-                                                                    <h3>${prod.price}</h3>                                        
-                                                                    <h3 className='amount'>Cantidad: {prod.stock}</h3>
-                                                                </div>
-                            
-                                                                <button onClick={() => deleteProd(prod.id)}>
-                                                                    X
+                                                                    <p>${prod.price}</p>                                        
+                                                                    <p className='amount'>Cantidad: {prod.cantidad}</p>
+                                                                </div>                            
+                                                                <button className='btn btnDelete' onClick={() => deleteProd(prod.id)}>
+                                                                <AiFillDelete/>
                                                                 </button>
-                                                        <h3>{totalPrice}</h3>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    
                                                 ))}
+                                                    <div className='totalContainer'>
+                                                        <h3>Total</h3>
+                                                        <h3>${totalPrice()}</h3>
+                                                    </div>
                                                 </div>
                       
                         
-                        /* {cartList.map(prod => <li key={prod.id}>{prod.title} - cant: {prod.cantidad}</li>)}
-                        <button onClick={vaciarCarrito}>Vaciar CArrito</button> */}
-                        <form 
-                            onSubmit={realizarCompra} 
-                            //onChange={handleChange} 
-                        >
-                            <input 
+                        }
+                    <div className='checkOut'>
+                        <form onSubmit={realizarCompra}>
+                            <input
                                 type='text' 
                                 name='name' 
                                 placeholder='nombre' 
@@ -143,9 +141,9 @@ console.log(orden)
                                 onChange={handleChange}
                                 value={dataForm.email}
                             /><br/>
-                        <button onClick={realizarCompra}>Generar Orden</button>
-                            {/* <button>Generar Orden</button> */}
+                        <button className='btn btnChekout' onClick={realizarCompra}>Generar Orden</button>                            
                         </form>
+                    </div>    
                     </>
 
             }          
@@ -154,69 +152,6 @@ console.log(orden)
 }
 
 export default Cart
-
-
-
-
-
-
-// const Cart = () => {
-//     const { cart, deleteProd, vaciarCarrito, total } = useContext(CartContext);
-    
-
-//     return (
-//         <>
-//             {cart.length === 0 ? (
-//                 <div>
-//                     <h2>El carrito esta vacio</h2>
-//                     <Link to="/">
-//                         <button>Volver a home</button>
-//                     </Link>
-//                 </div>
-//             ) : (
-//                 <> <div className='cartContainer' >                
-//                         <div className='cartHeader'> 
-//                             <div >
-//                                 <h1>Carrito</h1>
-//                                 <button onClick={vaciarCarrito}>Vaciar Carrito</button>
-//                             </div>
-//                         </div>
-
-//                     {cart?.map((prod) => (
-//                         <div key={prod.id}>
-//                             <div className='cartItems'>
-//                                 <div className='cartImg'>
-//                                     <img src={prod.img} alt={prod.name}/>
-//                                 </div>
-//                                 <div className='cartDetail'>
-//                                     <h3>{prod.name}</h3>
-//                                     <div className='prices'>
-//                                         <h3>${prod.price}</h3>                                        
-//                                         <h3 className='amount'>Cantidad: {prod.cantidad}</h3>
-//                                     </div>
-
-//                                     <button onClick={() => deleteProd(prod.id)}>
-//                                         X
-//                                     </button>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     ))}
-//                         <h3>{total()}</h3>
-//                     </div>
-//                 </>
-//             )}
-//         </>
-//     );
-// };
-
-// export default Cart;
-
-
-
-
-
-
 
 
 

@@ -13,25 +13,26 @@ const ItemDetail = ({ product }) => {
     const {addToCart} = useCartContext()
 
     const onAdd = (contador) => {
-        addToCart (product, contador)
+        addToCart ({...product, cantidad:contador})
         setShow(false)
     }
 
-    return (       
+    return (
+           
             <div className="itemCard">
                         <div className="itemImg">
                             <img src={img} alt={name}/>
                         </div>
 
-                        <div className="itemInfo">
+                        <div className="itemInfoDetail">
                             <h2>{name}</h2>
-                            <h3>Precio: {price}</h3>
-                            <h3>Stock: {stock}</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim elit nisi, ut rhoncus purus hendrerit vel. Cras ac ultricies lacus, eu vulputate ligula. Donec sagittis enim at sagittis molestie.</p>               
+                            <p>Precio: ${price}</p>
+                            <p>Stock: {stock}</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim elit nisi, ut rhoncus purus hendrerit vel. Cras ac ultricies lacus, eu vulputate ligula.</p>               
                             {show ? <ItemCount stock={stock} onAdd={onAdd} initial={1}/> :
-                            <div className="itemBtn">
-                                <Link to='/cart'><button>Terminar la Compra</button></Link>
-                                <Link to='/'><button>Seguir Comprando</button></Link>
+                            <div>
+                                <Link to='/cart'><button className="itemBtnDetailCart">Terminar la Compra</button></Link>
+                                <Link to='/'><button className="itemBtnDetailCart">Seguir Comprando</button></Link>
                             </div>}
                         </div>
             </div>

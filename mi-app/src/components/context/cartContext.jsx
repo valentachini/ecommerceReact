@@ -1,6 +1,5 @@
 import { useState, useContext, createContext } from 'react'
 
-
 const cartContext = createContext([])
 
 
@@ -18,11 +17,11 @@ export const CartContextProvider = ({children}) => {
          const indice=cartList.findIndex(i => i.id === items.id) 
        
          if (indice > -1){
-             const qtyVieja=cartList[indice].stock
+             const qtyVieja=cartList[indice].cantidad
  
-             let qtyNueva= qtyVieja + items.stock
+             let qtyNueva= qtyVieja + items.cantidad
  
-             cartList[indice].stock = qtyNueva
+             cartList[indice].cantidad = qtyNueva
              
              let arrAux = [...cartList]
              
@@ -33,8 +32,8 @@ export const CartContextProvider = ({children}) => {
          }
     }
 
-    const totalPrice =()=>{
-        return cartList.reduce((acum, prod) => acum + (prod.stock * prod.price) , 0)
+    const totalPrice = () => {
+        return cartList.reduce((acum, prod) => acum + (prod.cantidad * prod.price) , 0)
       }
   
     const deleteProd = (id) => {
@@ -42,7 +41,7 @@ export const CartContextProvider = ({children}) => {
     }
 
     const stockItem = () =>{
-        return cartList.reduce( (acum, item)=> acum = acum + item.stock , 0)
+        return cartList.reduce( (acum, item)=> acum = acum + item.cantidad , 0)
     }
 
     
