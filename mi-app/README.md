@@ -25,5 +25,8 @@ npm start
 ```
 Se puede acceder a traves de la siguiente dirección [localhost:3000](https://localhost:3000)
 
+### Firebase 	:fire:
+Utilizamos *Firestore* para crear una *base de datos*
+
 **Este es mi primer ecommerce hecho con React Js, fue todo un desafio y queda mucho por aprender. Muchas gracias a todo el equipo de CoderHouse por acompañarme 
 en este comienzo del camino en el _desarrollo front-end_ 🙂**
